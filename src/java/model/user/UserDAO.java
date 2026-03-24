@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import utils.DBUtils;
 
 public class UserDAO {
+
     private String LOGIN = "SELECT userID,ro.roleID,fullName,dateOfBirth,address,mail,phoneNumber FROM USERS us "
             + "INNER JOIN ROLES ro ON us.roleID = ro.roleID "
             + "WHERE username = ? AND passwordHash = ? AND us.userState = 1";
@@ -36,6 +37,7 @@ public class UserDAO {
                 ps.setString(1, username);
                 ps.setString(2, password);
                 rs = ps.executeQuery();
+
                 if (rs.next()) {
                     String userID = rs.getString("userID");
                     String roleID = rs.getString("roleID");

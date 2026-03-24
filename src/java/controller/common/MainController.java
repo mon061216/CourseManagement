@@ -126,6 +126,12 @@ public class MainController extends HttpServlet {
                     case "SaveAttendance":
                         url = "SaveAttendance";
                         break;
+                    case "editUser":
+                        url = "ShowUser";
+                        break;
+                    case "Profile":
+                        url = "Profile";
+                        break;
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

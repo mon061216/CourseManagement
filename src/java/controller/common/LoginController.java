@@ -5,11 +5,14 @@
 package controller.common;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.courses.CoursesDAO;
+import model.courses.CoursesDTO;
 import model.user.UserDAO;
 import model.user.UserDTO;
 
@@ -41,14 +44,24 @@ public class LoginController extends HttpServlet {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+//            System.out.println(password + username);
             UserDAO dao = new UserDAO();
             UserDTO user = dao.login(username, password);
-
+//            System.out.println(user != null ? "exits" :"no");
             if (user != null) {
                 String rolename = dao.getRoleName(user.getRoleID());
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("rolename", rolename);
+                CoursesDAO daoCourse = new CoursesDAO();
+                ArrayList<CoursesDTO> list = daoCourse.getActiveList();
+                if (!list.isEmpty() && list != null) {
+                    request.setAttribute("CourseList", list);
+                    // System.out.println("List size: " + (list != null ? list.size() : "null"));
+                } else {
+                    request.setAttribute("MSG", "No course");
+                }
+                
                 switch (user.getRoleID().trim()) {
                     case "AD":
                         url = ADMIN;
@@ -60,8 +73,7 @@ public class LoginController extends HttpServlet {
                         url = STUDENT;
                         break;
                 }
-            }
-            else {
+            } else {
                 request.setAttribute("MSG_LOGIN", "Invalid email or password.");
             }
 

@@ -5,6 +5,7 @@
 package controller.teacher;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class TeacherStudents extends HttpServlet {
                     String classID = request.getParameter("classID");
 
                     EnrolDAO dao = new EnrolDAO();
-                    List<UserDTO> list = dao.getStudentsByClass(classID);
+                    System.out.println(classID);
+                    ArrayList<UserDTO> list = dao.getStudentsByClass(classID);
 
                     AttendDAO attendDAO = new AttendDAO();
 
@@ -65,9 +67,22 @@ public class TeacherStudents extends HttpServlet {
                         attendanceMap.put(u.getUserID(), p);
                     }
 
+//                    if (list != null) {
+//                        System.out.println("empty1");
+//                    }
+//                    if (list.isEmpty()) {
+//                        System.out.println("empty");
+//                    }
+//                    if (attendanceMap.isEmpty()) {
+//                        System.out.println("emptyAttend1");
+//                    }
+//                    if (attendanceMap != null) {
+//                        System.out.println("emptyAttend");
+//                    }
                     request.setAttribute("ATTEND_MAP", attendanceMap);
                     request.setAttribute("STUDENT_LIST", list);
                     request.setAttribute("CLASS_ID", classID);
+
                     if (ADMIN.equalsIgnoreCase(role.trim())) {
                         url = ADMIN_URL;
                     } else if (TEACHER.equalsIgnoreCase(role.trim())) {
@@ -78,7 +93,7 @@ public class TeacherStudents extends HttpServlet {
             }
 
         } catch (Exception e) {
-            log("Error at TeacherStudentsController: " + e.toString());
+           // log("Error at TeacherStudentsController: " + e.toString());
         }
 
         request.getRequestDispatcher(url).forward(request, response);

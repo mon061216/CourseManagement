@@ -110,4 +110,11 @@ public class UserDTO {
         this.userState = userState;
     }
 
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", roleID=" + roleID + ", username=" + username + ", passwordHash=" + passwordHash + ", fullname=" + fullname + ", dob=" + dob + ", address=" + address + ", mail=" + mail + ", phoneNumber=" + phoneNumber + ", userState=" + userState + '}';
+    }
+
+    
+
 }

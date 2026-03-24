@@ -12,16 +12,16 @@ import utils.DBUtils;
 
 public class AttendDAO {
 
-    private String ADD = "INSERT INTO ATTENDANCE(slotID, userID, attendanceDate, attendanceState) "
+    private String ADD = "INSERT INTO ATTEND(slotID, userID, attendanceDate, attendanceState) "
             + "VALUES (?,?,?,?)";
 
-    private String UPDATE = "UPDATE ATTENDANCE SET attendanceState=? "
+    private String UPDATE = "UPDATE ATTEND SET attendanceState=? "
             + "WHERE slotID=? AND userID=?";
 
-    private String DELETE = "DELETE FROM ATTENDANCE "
+    private String DELETE = "DELETE FROM ATTEND "
             + "WHERE slotID=? AND userID=?";
 
-    private String SHOW = "SELECT * FROM ATTENDANCE";
+    private String SHOW = "SELECT * FROM ATTEND";
 
     public boolean create(AttendDTO a) {
         boolean check = false;
@@ -123,7 +123,7 @@ public class AttendDAO {
         String sql
                 = "SELECT COUNT(a.slotID) as attended, "
                 + "(SELECT COUNT(*) FROM ISSCHEDULED WHERE classID=?) as total "
-                + "FROM ATTENDANCE a "
+                + "FROM ATTEND a "
                 + "JOIN ISSCHEDULED i ON a.slotID = i.slotID "
                 + "WHERE i.classID=? AND a.userID=? AND a.attendanceState=1";
 
@@ -156,7 +156,7 @@ public class AttendDAO {
 
     public boolean isAttendanceExist(String slotID, String userID) {
 
-        String sql = "SELECT * FROM ATTENDANCE WHERE slotID=? AND userID=?";
+        String sql = "SELECT * FROM ATTEND WHERE slotID=? AND userID=?";
 
         try ( Connection conn = DBUtils.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
 

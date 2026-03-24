@@ -128,6 +128,10 @@
         <servlet-name>SaveAttendance</servlet-name>
         <servlet-class>controller.teacher.Attendance.SaveAttendance</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>controller.common.Profile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -260,6 +264,10 @@
     <servlet-mapping>
         <servlet-name>SaveAttendance</servlet-name>
         <url-pattern>/SaveAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

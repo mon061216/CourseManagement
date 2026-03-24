@@ -181,7 +181,9 @@ public class EnrolDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ClassesDTO c = new ClassesDTO(rs.getString("classID"), rs.getString("courseID"), rs.getString("className"), rs.getInt("classCapacity"), (java.sql.Date) rs.getDate("classStartDate"), (java.sql.Date) rs.getDate("classEndDate"), rs.getString("academicTerm"), rs.getBoolean("classState"), rs.getString("teacherID"));
+                ClassesDTO c = new ClassesDTO(rs.getString("classID"), rs.getString("courseID"), rs.getString("className"), rs.getInt("classCapacity"),
+                        (java.sql.Date) rs.getDate("classStartDate"),
+                        (java.sql.Date) rs.getDate("classEndDate"), rs.getString("academicTerm"), rs.getBoolean("classState"), rs.getString("teacherID"));
                 list.add(c);
             }
         } catch (ClassNotFoundException ex) {
@@ -190,9 +192,9 @@ public class EnrolDAO {
         return list;
     }
 
-    public List<UserDTO> getStudentsByClass(String classID) {
+    public ArrayList<UserDTO> getStudentsByClass(String classID) {
 
-        List<UserDTO> list = new ArrayList<>();
+        ArrayList<UserDTO> list = new ArrayList<>();
 
         try ( Connection con = DBUtils.getConnection();  PreparedStatement ps = con.prepareStatement(GET_STUDENTS_BY_CLASS)) {
 
@@ -200,7 +202,6 @@ public class EnrolDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
                 UserDTO user = new UserDTO(rs.getString("userID"), rs.getString("roleID"), rs.getString("username"), rs.getString("passwordHash"), rs.getString("fullname"), rs.getDate("dateOfBirth"), rs.getString("address"), rs.getString("mail"), rs.getString("phoneNumber"), rs.getBoolean("userState"));
 
                 list.add(user);
@@ -209,7 +210,6 @@ public class EnrolDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return list;
     }
 

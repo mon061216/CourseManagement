@@ -5,6 +5,7 @@
 package controller.admin.course;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +55,13 @@ public class UpdateCourse extends HttpServlet {
                 boolean check = dao.update(course);
                 System.out.println(check);
                 if (check) {
+                    ArrayList<CoursesDTO> list = dao.getActiveList();
+                    if (!list.isEmpty() && list != null) {
+                        request.setAttribute("CourseList", list);
+                        // System.out.println("List size: " + (list != null ? list.size() : "null"));
+                    } else {
+                        request.setAttribute("MSG", "No course");
+                    }
                     url = SUCCESS;
 //                    request.setAttribute("CourseList", dao.get);
                 } else {

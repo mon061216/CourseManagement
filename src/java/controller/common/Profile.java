@@ -2,12 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.common.user;
+package controller.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,7 @@ import model.user.UserDTO;
  *
  * @author PC
  */
-public class UpdateUser extends HttpServlet {
+public class Profile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,40 +31,19 @@ public class UpdateUser extends HttpServlet {
     private static final String ADMIN = "admin/MyApp.jsp";
     private static final String STUDENT = "student/MyApp.jsp";
     private static final String TEACHER = "TeacherClasses";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "MainController?action=ShowUser";
-
+        String url = "Profile.jsp";
         try {
-
             String userID = request.getParameter("userID");
-            String roleID = request.getParameter("roleID");
-            String username = request.getParameter("username");
-            String fullname = request.getParameter("fullname");
-            String dobStr = request.getParameter("dob");
-            String mail = request.getParameter("mail");
-            String phone = request.getParameter("phoneNumber");
-            String address = request.getParameter("address");
-            String stateStr = request.getParameter("userState");
-
-            Date dob = null;
-            if (dobStr != null && !dobStr.isEmpty()) {
-                dob = new SimpleDateFormat("yyyy-MM-dd").parse(dobStr);
-            }
-
-            // parse boolean
-            boolean userState = Boolean.parseBoolean(stateStr);
 
             UserDAO dao = new UserDAO();
-            UserDTO oldUser = dao.getObjectByID(userID);
+            UserDTO user = dao.getObjectByID(userID);
+            if (user != null) {
+                request.setAttribute("user", user);
 
-            UserDTO user = new UserDTO(userID, roleID, username, oldUser.getPasswordHash(), fullname, dob, address, mail, phone, userState);
-
-            boolean check = dao.update(user);
-                System.out.println(roleID + " " + check);
-            if (check) {
+            } else {
                 switch (user.getRoleID().trim()) {
                     case "AD":
                         url = ADMIN;
@@ -75,22 +52,15 @@ public class UpdateUser extends HttpServlet {
                         url = TEACHER;
                         break;
                     case "SV":
-                        
                         url = STUDENT;
                         break;
                 }
-                request.setAttribute("MSG", "Update user successfully!");
-            } else {
-                request.setAttribute("MSG", "Update failed!");
+                request.setAttribute("MSG", "No data");
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("MSG", "Error: " + e.getMessage());
+            log(e + "");
         }
-
         request.getRequestDispatcher(url).forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

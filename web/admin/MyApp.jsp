@@ -25,14 +25,16 @@
                     <form action="MainController" method="POST" class="d-inline">
                         <button type="submit" name="action" value="ShowCourse" class="btn btn-info btn-sm">Refresh List</button>
                         <button name="action" value="Profile">
+                            <input type="hidden" name="userID" value="${user.userID}">
                             My Profile
                         </button>
                     </form>
+
                     <a href="admin/CreateCourse.jsp">
                         <button type="submit" class="btn btn-success btn-sm">+ New Course</button>
                     </a>
 
-                    <a href="admin/User.jsp" class="btn btn-secondary btn-sm">Edit User</a>
+                    <a href="${pageContext.request.contextPath}/MainController?action=editUser" class="btn btn-secondary btn-sm">Edit User</a>
                 </div>
             </div>
 
