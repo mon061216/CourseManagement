@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.admin.course;
 
 import java.io.IOException;
@@ -56,16 +52,17 @@ public class UpdateCourse extends HttpServlet {
                 System.out.println(check);
                 if (check) {
                     ArrayList<CoursesDTO> list = dao.getActiveList();
-                    if (!list.isEmpty() && list != null) {
+                    if (list != null && !list.isEmpty()) {
                         request.setAttribute("CourseList", list);
                         // System.out.println("List size: " + (list != null ? list.size() : "null"));
                     } else {
                         request.setAttribute("MSG", "No course");
                     }
+                    request.setAttribute("MSG", "Update course successfully.");
                     url = SUCCESS;
-//                    request.setAttribute("CourseList", dao.get);
                 } else {
                     url = ERROR;
+                    request.setAttribute("MSG", "Update course failed.");
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

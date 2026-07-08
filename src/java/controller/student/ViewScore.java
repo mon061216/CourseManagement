@@ -25,10 +25,21 @@ public class ViewScore extends HttpServlet {
             GradesDAO dao = new GradesDAO();
             ArrayList<GradesDTO> arr = dao.getGradeOfStudentByClass(classID,studentID);
             if (arr != null) {
-                url = SUCCESS;
                 request.setAttribute("GRADE_LIST", arr);
                 request.setAttribute("CLASS_ID", classID);
                 request.setAttribute("STUDENT_ID", studentID);
+                
+                javax.servlet.http.HttpSession session = request.getSession(false);
+                if (session != null) {
+                    String role = (String) session.getAttribute("rolename");
+                    if (role != null && role.equalsIgnoreCase("student")) {
+                        url = "student/StudentScore.jsp";
+                    } else {
+                        url = SUCCESS;
+                    }
+                } else {
+                    url = SUCCESS;
+                }
             } else {
                 request.setAttribute("MSG", "Empty list or wrong system.");
             }

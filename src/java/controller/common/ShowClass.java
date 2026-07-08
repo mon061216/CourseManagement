@@ -57,13 +57,15 @@ public class ShowClass extends HttpServlet {
                     url = STUDENT_URL;
                     break;
                 case TEACHER:
-                    url = TEACHER_URL;
+                    url = "MainController?action=BackToMyClasses";
                     break;
             }
             request.setAttribute("courseID", courseID);
             if (arr.isEmpty() || arr == null) {
                 request.setAttribute("MSG", "This list is empty.");
             } else {
+                System.out.println(courseID);
+                request.setAttribute("COURSE_ID", courseID);
                 request.setAttribute("ClassList", arr);
             }
         }

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller.teacher.Attendance;
 
 import java.io.IOException;
@@ -14,20 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.enrol.EnrolDAO;
 import model.user.UserDTO;
-
-/**
- *
- * @author PC
- */
 public class TakeAttendance extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private String ERROR = "teacher/Schedule.jsp";
     private String SUCCESS = "teacher/TakeAttendance.jsp";
 

@@ -53,9 +53,10 @@ public class TeacherStudents extends HttpServlet {
                 if (role != null) {
 
                     String classID = request.getParameter("classID");
-
+String courseID = request.getParameter("courseID");
                     EnrolDAO dao = new EnrolDAO();
                     System.out.println(classID);
+                    System.out.println(role);
                     ArrayList<UserDTO> list = dao.getStudentsByClass(classID);
 
                     AttendDAO attendDAO = new AttendDAO();
@@ -82,18 +83,17 @@ public class TeacherStudents extends HttpServlet {
                     request.setAttribute("ATTEND_MAP", attendanceMap);
                     request.setAttribute("STUDENT_LIST", list);
                     request.setAttribute("CLASS_ID", classID);
-
-                    if (ADMIN.equalsIgnoreCase(role.trim())) {
+request.setAttribute("COURSE_ID", courseID);
+                    if (ADMIN.equalsIgnoreCase(role)) {
                         url = ADMIN_URL;
-                    } else if (TEACHER.equalsIgnoreCase(role.trim())) {
+                    } else if (TEACHER.equalsIgnoreCase(role)) {
                         url = TEACHER_URL;
                     }
-
                 }
             }
 
         } catch (Exception e) {
-           // log("Error at TeacherStudentsController: " + e.toString());
+            log("Error at TeacherStudentsController: " + e.toString());
         }
 
         request.getRequestDispatcher(url).forward(request, response);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.admin.classes;
 
 import java.io.IOException;
@@ -13,21 +9,8 @@ import javax.servlet.http.HttpSession;
 import model.classes.ClassesDAO;
 import model.classes.ClassesDTO;
 
-/**
- *
- * @author PC
- */
 public class UpdateClasses extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String SUCCESS = "admin/Classes.jsp";
     private static final String ERROR = "admin/Classes.jsp";
 

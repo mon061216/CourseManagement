@@ -42,7 +42,7 @@ public class ShowCourse extends HttpServlet {
                         url = ADMIN;
                         break;
                     case "GV":
-                        url = TEACHER;
+                        url = "MainController?action=BackToMyClasses";
                         break;
                     case "SV":
                         url = STUDENT;
