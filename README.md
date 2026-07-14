@@ -39,5 +39,3 @@ A comprehensive Java Web Application designed to manage courses, classes, users,
    - Right-click the project in NetBeans and select **Clean and Build**.
    - Deploy and run the project on a supported application server (e.g., **Apache Tomcat** or **GlassFish**).
 
-## 👥 Contributors
-- **Group 3 - Class SE1920**
