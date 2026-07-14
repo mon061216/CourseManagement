@@ -87,6 +87,9 @@ public class MainController extends HttpServlet {
                     case "MyClasses":
                         url = "MyClassesServlet";
                         break;
+                    case "StudentSchedule":
+                        url = "StudentScheduleServlet";
+                        break;
                     case "ViewStudents":
                         url = "TeacherStudents";
                         break;

@@ -35,6 +35,7 @@ public class EnrolClasses extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String classID = request.getParameter("classID");
+        String courseID = request.getParameter("courseID");
 
         HttpSession session = request.getSession();
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -45,13 +46,13 @@ public class EnrolClasses extends HttpServlet {
         try {
             if (dao.isEnrolled(userID, classID)) {
                 request.setAttribute("ERROR", "You already enrolled this class.");
-                request.getRequestDispatcher("student/Classes.jsp").forward(request, response);
+                request.getRequestDispatcher("MainController?action=ShowClass&courseID=" + courseID).forward(request, response);
                 return;
             }
 
             if (!dao.checkCapacity(classID)) {
                 request.setAttribute("ERROR", "Class is full.");
-                request.getRequestDispatcher("student/Classes.jsp").forward(request, response);
+                request.getRequestDispatcher("MainController?action=ShowClass&courseID=" + courseID).forward(request, response);
                 return;
             }
 

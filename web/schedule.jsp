@@ -30,13 +30,14 @@
                             <td class="fw-bold table-light small">Slot ${slot}</td>
                             <c:forEach var="day" items="${['Mon','Tue','Wed','Thu','Fri','Sat','Sun']}">
                                 <td style="min-height: 80px; width: 12%;">
-                                    <c:forEach var="c" items="${CLASS_LIST}">
-                                        <c:if test="${fn:contains(c.schedule, day.concat('-').concat(slot))}">
-                                            <div class="p-1 mb-1 bg-success-subtle border border-success rounded small">
-                                                ${c.classID}
+                                    <c:set var="key" value="${day}-${slot}" />
+                                    <c:if test="${not empty SCHEDULE_MAP[key]}">
+                                        <c:forEach var="classID" items="${SCHEDULE_MAP[key]}">
+                                            <div class="p-2 mb-2 bg-success-subtle border border-success rounded small shadow-sm fw-bold">
+                                                ${classID}
                                             </div>
-                                        </c:if>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </c:if>
                                 </td>
                             </c:forEach>
                         </tr>

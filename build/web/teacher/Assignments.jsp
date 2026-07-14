@@ -1,86 +1,179 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Assignments</title>
-    </head>
-    <body>
+    <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-        <h2>Assignments - Class ${classID}</h2>
+        <!DOCTYPE html>
+        <html>
 
-        <h3>Create Assignment</h3>
+        <head>
+            <title>Assignments</title>
 
-        <form action="MainController" method="post">
+            <!-- Bootstrap -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-            <input type="hidden" name="classID" value="${classID}">
+            <!-- CSS -->
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+        </head>
 
-            Title:
-            <input type="text" name="assignmentTitle" required><br><br>
+        <body>
 
-            Description:
-            <input type="text" name="assignmentDescription"><br><br>
+            <div class="container mt-5">
 
-            Note:
-            <input type="text" name="assignmentNote"><br><br>
+                <div class="glass-card">
 
-            Due Date:
-            <input type="datetime-local" name="dueDate" required><br><br>
+                    <h2 class="mb-4">
+                        Assignments - Class ${classID}
+                    </h2>
 
-            <button type="submit" name="action" value="SaveAssignment">
-                Create
-            </button>
+                    <form action="MainController" method="post">
 
-        </form>
+                        <input type="hidden" name="classID" value="${classID}">
 
-        <hr>
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
 
-        <h3>Assignment List</h3>
+                            <input class="form-control" type="text" name="assignmentTitle" required>
+                        </div>
 
-        <c:if test="${empty ASSIGNMENT_LIST}">
-            No assignments found.
-        </c:if>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
 
-        <c:forEach var="a" items="${ASSIGNMENT_LIST}">
-            <div>
-                <form action="MainController" method="post">
+                            <input class="form-control" type="text" name="assignmentDescription">
+                        </div>
 
-                    <input type="hidden" name="assignmentID" value="${a.assignmentID}">
-                    <input type="hidden" name="classID" value="${classID}">
+                        <div class="mb-3">
+                            <label class="form-label">Note</label>
 
-                    Title:
-                    <input type="text" name="assignmentTitle"
-                           value="${a.assignmentTitle}"><br><br>
+                            <input class="form-control" type="text" name="assignmentNote">
+                        </div>
 
-                    Description:
-                    <input type="text" name="assignmentDescription"
-                           value="${a.assignmentDescription}"><br><br>
+                        <div class="mb-3">
+                            <label class="form-label">Due Date</label>
 
-                    Note:
-                    <input type="text" name="assignmentNote"
-                           value="${a.assignmentNote}"><br><br>
+                            <input class="form-control" type="datetime-local" name="dueDate">
+                        </div>
 
-                    Due Date:
-                    <input type="datetime-local" name="dueDate" value="${a.dueDate}"><br><br>
+                        <button class="btn-premium" type="submit" name="action" value="SaveAssignment">
 
-                    <button type="submit" name="action" value="UpdateAssignment">
-                        Update
-                    </button>
-                    <button type="submit" name="action" value="ViewSubmissions">
-                        View Submissions
-                    </button>
-                </form>
+                            Create Assignment
 
-                <hr>
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <br>
+
+                <div class="glass-card">
+
+                    <h3 class="mb-4">
+                        Assignment List
+                    </h3>
+
+                    <c:if test="${empty ASSIGNMENT_LIST}">
+                        <p>No assignments found.</p>
+                    </c:if>
+
+                    <table class="table table-glass">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Note</th>
+                                <th>Due Date</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <c:forEach var="a" items="${ASSIGNMENT_LIST}">
+
+                                <tr>
+
+                                    <form action="MainController" method="post">
+
+                                        <input type="hidden" name="assignmentID" value="${a.assignmentID}">
+
+                                        <input type="hidden" name="classID" value="${classID}">
+
+                                        <td>
+
+                                            <input class="form-control" name="assignmentTitle"
+                                                value="${a.assignmentTitle}">
+
+                                        </td>
+
+                                        <td>
+
+                                            <input class="form-control" name="assignmentDescription"
+                                                value="${a.assignmentDescription}">
+
+                                        </td>
+
+                                        <td>
+
+                                            <input class="form-control" name="assignmentNote"
+                                                value="${a.assignmentNote}">
+
+                                        </td>
+
+                                        <td>
+
+                                            <input class="form-control" type="datetime-local" name="dueDate"
+                                                value="${a.dueDate}">
+
+                                        </td>
+
+                                        <td>
+
+                                            <button class="btn-premium" type="submit" name="action"
+                                                value="UpdateAssignment">
+
+                                                Update
+
+                                            </button>
+
+                                            <br><br>
+
+                                            <button class="btn btn-secondary" type="submit" name="action"
+                                                value="ViewSubmissions">
+
+                                                View
+
+                                            </button>
+
+                                        </td>
+
+                                    </form>
+
+                                </tr>
+
+                            </c:forEach>
+
+                        </tbody>
+
+                    </table>
+
+                    <form action="MainController" method="post">
+
+                        <button class="btn-premium" type="submit" name="action" value="BackToMyClasses">
+
+                            Back
+
+                        </button>
+
+                    </form>
+
+                </div>
+
             </div>
-        </c:forEach>
 
-        <br>
-        <form action="MainController" method="post">
-            <button type="submit" name="action" value="BackToMyClasses">
-                Back
-            </button>
-        </form>
+        </body>
 
-    </body>
-</html>
+        </html>

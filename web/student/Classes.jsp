@@ -35,6 +35,7 @@
                             <span class="badge bg-info bg-opacity-75 text-dark rounded-pill px-3 py-2">Seats: ${c.classCapacity}</span>
                             <form action="MainController" method="post" class="m-0">
                                 <input type="hidden" name="classID" value="${c.classID}" />
+                                <input type="hidden" name="courseID" value="${c.courseID}" />
                                 <button type="submit" name="action" value="EnrolClass" class="btn btn-premium btn-sm rounded-pill px-4 shadow-sm">Enroll Now</button>
                             </form>
                         </div>

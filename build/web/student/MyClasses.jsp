@@ -28,9 +28,11 @@
     <div class="container mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold text-dark mb-0">My Enrolled Classes</h2>
-            <a href="schedule.jsp" class="btn btn-premium shadow-sm rounded-pill px-4">
-                View Weekly Schedule
-            </a>
+            <form action="MainController" method="post" class="m-0">
+                <button class="btn btn-premium shadow-sm rounded-pill px-4" type="submit" name="action" value="StudentSchedule">
+                    View Weekly Schedule
+                </button>
+            </form>
         </div>
 
         <div class="row">
