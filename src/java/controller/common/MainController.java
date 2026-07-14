@@ -31,7 +31,7 @@ public class MainController extends HttpServlet {
         try {
             String action = request.getParameter("action");
             String url = "login.jsp";
-            System.out.println(action);
+            System.out.println("MainController action: "+action);
             if (action != null) {
                 switch (action.trim()) {
                     case "Login":

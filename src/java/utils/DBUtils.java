@@ -15,11 +15,12 @@ import java.sql.SQLException;
 public class DBUtils {
     public static final Connection getConnection() throws ClassNotFoundException, SQLException{
         Connection  conn = null;
-        String hostname = "localhost";
-        String port = "1433";
-        String databasename = "CourseProject";
-        String username = "sa";
-        String pass = "12345";
+        java.util.ResourceBundle rb = java.util.ResourceBundle.getBundle("utils.db");
+        String hostname = rb.getString("hostname");
+        String port = rb.getString("port");
+        String databasename = rb.getString("databasename");
+        String username = rb.getString("username");
+        String pass = rb.getString("password");
         String url = String.format("jdbc:sqlserver://%s:%s;databasename=%s;", hostname,port,databasename);
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         conn = DriverManager.getConnection(url, username, pass);

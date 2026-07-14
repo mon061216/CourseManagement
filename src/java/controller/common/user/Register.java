@@ -65,7 +65,7 @@ public class Register extends HttpServlet {
                 if (roleID == null || roleID.isEmpty()) {
                     roleID = "SV";
                 }
-                UserDTO newUser = new UserDTO(userID, roleID, username, password, fullName, dob, address, mail, phone, true);
+                UserDTO newUser = new UserDTO(userID, roleID, username, utils.PasswordUtils.hashPassword(password), fullName, dob, address, mail, phone, true);
                 boolean check = dao.create(newUser);
 
                 if (check) {

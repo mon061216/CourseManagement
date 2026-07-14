@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("password");
 //            System.out.println(password + username);
             UserDAO dao = new UserDAO();
-            UserDTO user = dao.login(username, password);
+            UserDTO user = dao.login(username, utils.PasswordUtils.hashPassword(password));
 //            System.out.println(user != null ? "exits" :"no");
             if (user != null) {
                 String rolename = dao.getRoleName(user.getRoleID());
